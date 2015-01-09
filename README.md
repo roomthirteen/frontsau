@@ -1,6 +1,6 @@
 # Pimtool
 
-TODO: Write a gem description
+A Ruby-Gem to assist with developmen pf pimcore webapps.
 
 ## Installation
 
