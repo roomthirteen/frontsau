@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require "thor"
+require "pry"
+require 'pimtool'
+require 'pimtool/thor_app'
+require 'pimtool/assets/sprockets'
+
+root_path = "../pimcore"
+source_paths = [File.join(root_path, 'vendor/bower'),File.join(root_path, 'vendor/bower/compass/core/stylesheets')] + Dir[File.join(root_path, 'plugins/*/static/*')]
+output_path = File.join root_path, 'website/var/static-assets'
+
+$sprockets = Pimtool::Assets::Sprockets.new source_paths, output_path
+
+Pimtool::ThorApp.start
+
