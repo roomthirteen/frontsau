@@ -8,7 +8,6 @@ A small web development tool to assist with coffeescript, sass, less, haml, imag
 
 ## Installation
 
-    # NOT IMPLEMENTED YET
     $ gem install frontsau
 
 And then go to your webapps project root:
