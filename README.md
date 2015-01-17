@@ -1,26 +1,25 @@
 # Frontsau
 
-A Ruby-Gem to assist with developmen pf pimcore webapps.
+A small web development tool to assist with coffeescript, sass, less, haml, image assets. 
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'frontsau'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
+    # NOT IMPLEMENTED YET
     $ gem install frontsau
+
+And then go to your webapps project root:
+
+    $ frontsau init
 
 ## Usage
 
-TODO: Write usage instructions here
+Frontsau supports the follogin commands:
+
+    $ frontsau debug
+    $ frontsau server
+    $ frontsau compile
+    $ frontsau watch
+
 
 ## Contributing
 
