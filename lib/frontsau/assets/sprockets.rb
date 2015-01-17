@@ -1,27 +1,39 @@
-require 'sprockets'
-require 'sass'
-require 'coffee-script'
-
 module Frontsau
   module Assets
     class Sprockets < ::Sprockets::Environment
       attr_accessor :source_paths, :output_path
-      def initialize source_paths, output_path
 
-        self.source_paths = source_paths
-        self.output_path = output_path
+      def initialize
         super()
-        source_paths.each do |dir|
-          append_path dir
+        self.output_path = File.expand_path Frontsau.config[:assets][:path]
+        Frontsau.config[:assets][:sources].each do |glob_dir|
+          Dir[File.expand_path(glob_dir)].each do |dir|
+            append_path dir
+          end
         end
+        self.register_postprocessor 'text/css', UrlRewriter
       end
 
+      def manifest
+        m = {}
+        compilable_paths.each do |path|
+          asset = self[path]
+          next unless asset.present?
+          m[path] = {
+              digest: asset.digest,
+              modified: asset.mtime
+          }
+        end
+        m
+      end
 
-      SUPPORTED_FILES_TYPES = [".css",".js"]
-
-      def each_supported_logical_path
-        each_logical_path.to_a.delete_if do |p|
-          !SUPPORTED_FILES_TYPES.include? File.extname(p).downcase
+      def compilable_paths
+        return enum_for(:compilable_paths) unless block_given?
+        each_logical_path do |path|
+          Frontsau.config[:assets][:compile].each do |glob|
+            yield path if File.fnmatch(glob, path)
+            #puts "#{path} => #{glob} :: #{File.fnmatch(glob, path)}"
+          end
         end
       end
 

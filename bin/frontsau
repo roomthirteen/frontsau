@@ -1,16 +1,15 @@
 #!/usr/bin/env ruby
 
-require "thor"
-require "pry"
+require 'thor'
+require 'pry'
+require 'yaml'
+require 'active_support'
+require 'active_support/all'
 require 'frontsau'
 require 'frontsau/thor_app'
-require 'frontsau/assets/sprockets'
 
-root_path = "../pimcore"
-source_paths = [File.join(root_path, 'vendor/bower'),File.join(root_path, 'vendor/bower/compass/core/stylesheets')] + Dir[File.join(root_path, 'plugins/*/static/*')]
-output_path = File.join root_path, 'website/var/static-assets'
 
-$sprockets = Frontsau::Assets::Sprockets.new source_paths, output_path
+Frontsau.init File.expand_path('.')
 
 Frontsau::ThorApp.start
 

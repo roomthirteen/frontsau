@@ -1,25 +1,81 @@
-require 'rack'
-require 'frontsau/assets/debug_rack_app'
-require 'filewatcher'
-
 module Frontsau
   class ThorApp < Thor
+
+    include Thor::Actions
 
     desc "compile", "Compiles all available assets."
     def compile
       say "Dumping assets:"
-      $sprockets.each_supported_logical_path.each do |path|
-        say "   #{path}"
-        $sprockets.dump path
-
+      inside Frontsau.assets_path do
+        paths = Frontsau.sprockets.compilable_paths
+        manifest = {}
+        p = ProgressBar.create(
+            total: paths.count,
+            format: "   %p% | %B"
+        )
+        paths.each do |path|
+          p.increment
+          begin
+            asset = Frontsau.sprockets[path]
+            data = asset.to_s
+            create_file path, data, force: true, verbose: false
+            manifest[path] = {
+              digest: asset.digest,
+              modified: asset.mtime
+            }
+          rescue Exception => e
+            say ""
+            say ""
+            say "#{e.class.name} ", :red
+            say "#{e.message}"
+            say ""
+            say ""
+          end
+        end
+        say ""
+        create_file "manifest.json", JSON.pretty_generate(manifest), force: true
       end
     end
 
-    desc "debug", "Dump all logical asset paths to the console."
-    def debug
+    desc "clean", "Removes all precompiled artefacts."
+    def clean
+      Dir[Frontsau.config[:assets][:path]+"/*"].each do |f|
+        remove_file f
+      end
+    end
+
+
+    desc "watch", "Watches for filechanges and compiles to the asset path immediatly."
+    def watch
+      compile
+      say "Watching for asset changes:"
+      Frontsau::Assets::Watcher.new do |path|
+        begin
+          asset = Frontsau.sprockets[path]
+          create_file path, asset.to_s, force: true, verbose: true
+        rescue Exception => e
+          say ""
+          say ""
+          say "#{e.class.name} ", :red
+          say "#{e.message}"
+          say ""
+          say ""
+        end
+      end
+    end
+
+
+    desc "debug WHAT", "Dump all logical asset paths to the console."
+    def debug what = "all"
       puts ""
-      $sprockets.each_supported_logical_path.each do |path|
-        puts "  #{path}"
+      if what == "all"
+        Frontsau.sprockets.each_logical_path do |path|
+          puts "  #{path}"
+        end
+      elsif
+        Frontsau.sprockets.compilable_paths.each do |path|
+          puts "  #{path}"
+        end
       end
       puts ""
     end
@@ -29,11 +85,17 @@ module Frontsau
       app = Rack::Builder.new do
         use Rack::CommonLogger
         use Rack::ShowExceptions
-        map "/debug" do
-          run Frontsau::Assets::DebugRackApp.new
+        use Rack::Cors do
+          allow do
+            origins '*'
+            resource '*'
+          end
         end
         map "/" do
-          run $sprockets
+          run Frontsau::Assets::Rack.new
+        end
+        map "/#{Frontsau.config[:assets][:path]}" do
+          run Frontsau.sprockets
         end
       end
       Rack::Handler::WEBrick.run app, :Port => 9292
@@ -52,30 +114,5 @@ module Frontsau
       output = File.join(path,"#{name}.php")
       File.write output, html
     end
-
-
-    desc "watch", "Watch for file changes to handle"
-    def watch
-      targets = [
-          "plugins/**/*.haml",
-          "website/**/*.haml"
-      ]
-      puts "Precompiling all files"
-      targets.each do |target|
-        Dir[target].each do |file|
-          puts "  => #{file}"
-        end
-      end
-      puts "Waiting for changes"
-      FileWatcher.new(targets).watch do |file|
-        puts "  => #{file}"
-        type = File.extname(file)[1..-1].to_sym
-        if type == :haml
-          haml file
-        end
-      end
-    end
-
-
   end
 end

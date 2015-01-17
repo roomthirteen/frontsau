@@ -18,15 +18,21 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "filewatcher", "~> 0.3.6"
+  spec.add_dependency "filewatcher"
+  spec.add_dependency "rb-fsevent"
   spec.add_dependency "coffee-script", "~> 2.3.0"
   spec.add_dependency "sass", "~> 3.4.9"
   spec.add_dependency "less", "~> 2.6.0"
   spec.add_dependency "libv8", "~> 3.16.14.0"
+  spec.add_dependency "therubyracer"
   spec.add_dependency "sprockets", "~> 2.12.3"
   spec.add_dependency "sinatra", "~> 1.4.5"
   spec.add_dependency "sinatra-contrib", "~> 1.4.2"
   spec.add_dependency "thor", "~> 0.19.1"
+  spec.add_dependency "activesupport"
+  spec.add_dependency "rack"
+  spec.add_dependency "rack-cors"
+  spec.add_dependency "ruby-progressbar"
 
 
   spec.add_development_dependency "bundler", "~> 1.7"

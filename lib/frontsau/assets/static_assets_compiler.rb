@@ -1,8 +1,3 @@
-require 'filewatcher'
-require 'coffee-script'
-require 'sass'
-require 'pry'
-
 module Frontsau
 
   class StaticAssetsCompiler

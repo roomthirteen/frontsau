@@ -1,0 +1,12 @@
+frontsau:
+  assets:
+    path: assets
+    sources:
+      - css
+      - js
+      - image
+    compile:
+      - style.css
+      - script.js
+      - '*.jpg'
+      - '*.png'
