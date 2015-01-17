@@ -1,6 +1,10 @@
 # Frontsau
 
+<img width="250" align="right" src="http://th01.deviantart.net/fs71/PRE/f/2011/286/f/b/cool_pig_by_skuboglesby-d4coiq2.png">
+
 A small web development tool to assist with coffeescript, sass, less, haml, image assets. 
+
+
 
 ## Installation
 
