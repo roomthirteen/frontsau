@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Benjamin Seibert"]
   spec.email         = ["benjamin.seibert@roomthirteen.de"]
   spec.summary       = %q{Frontsau, the new kid in frontend dev.}
-  spec.description   = "blabla"
+  spec.description   = "Frontsau brings coffeescript, sass, less to any webapplication without big need of modifying it. No matter if your using wordpress, joomla, zend (only for the php ones)... and many more."
   spec.homepage      = "http://roomthirteen.de"
   spec.license       = "MIT"
 
