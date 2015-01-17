@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/json'
 
-module Pimtool
+module Frontsau
   module Assets
     class DebugRackApp < Sinatra::Base
       get '/' do

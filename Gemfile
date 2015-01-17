@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in pimtool.gemspec
+# Specify your gem's dependencies in frontsau.gemspec
 gemspec

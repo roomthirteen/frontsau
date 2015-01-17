@@ -2,7 +2,7 @@ require 'sprockets'
 require 'sass'
 require 'coffee-script'
 
-module Pimtool
+module Frontsau
   module Assets
     class Sprockets < ::Sprockets::Environment
       attr_accessor :source_paths, :output_path

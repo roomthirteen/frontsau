@@ -1,5 +1,5 @@
-require "pimtool/version"
+require "frontsau/version"
 
-module Pimtool
+module Frontsau
 
 end

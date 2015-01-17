@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pimtool.iml" filepath="$PROJECT_DIR$/.idea/pimtool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/frontsau.iml" filepath="$PROJECT_DIR$/.idea/frontsau.iml" />
     </modules>
   </component>
 </project>

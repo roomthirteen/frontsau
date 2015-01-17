@@ -1,8 +1,8 @@
 require 'rack'
-require 'pimtool/assets/debug_rack_app'
+require 'frontsau/assets/debug_rack_app'
 require 'filewatcher'
 
-module Pimtool
+module Frontsau
   class ThorApp < Thor
 
     desc "compile", "Compiles all available assets."
@@ -30,7 +30,7 @@ module Pimtool
         use Rack::CommonLogger
         use Rack::ShowExceptions
         map "/debug" do
-          run Pimtool::Assets::DebugRackApp.new
+          run Frontsau::Assets::DebugRackApp.new
         end
         map "/" do
           run $sprockets
@@ -47,7 +47,7 @@ module Pimtool
       path = File.dirname input
       name = File.basename input, '.haml'
       tool_root = File.dirname(File.dirname(File.dirname(__FILE__)))
-      cmd = File.join(tool_root,"bin/pimtool-phaml-compiler")
+      cmd = File.join(tool_root,"bin/frontsau-phaml-compiler")
       html = `#{cmd} '#{input}'`
       output = File.join(path,"#{name}.php")
       File.write output, html

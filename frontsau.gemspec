@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'pimtool/version'
+require 'frontsau/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "pimtool"
-  spec.version       = Pimtool::VERSION
+  spec.name          = "frontsau"
+  spec.version       = Frontsau::VERSION
   spec.authors       = ["Benjamin Seibert"]
   spec.email         = ["benjamin.seibert@roomthirteen.de"]
-  spec.summary       = %q{A Ruby-Gem to assist with developmen pf pimcore webapps.}
-  spec.description   = %q{A Ruby-Gem to assist with developmen pf pimcore webapps.}
+  spec.summary       = %q{Have your assets allways at ease with frontsau.}
+  spec.description   = %q{Have your assets allways at ease with frontsau.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

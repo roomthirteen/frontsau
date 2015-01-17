@@ -3,7 +3,7 @@ require 'coffee-script'
 require 'sass'
 require 'pry'
 
-module Pimtool
+module Frontsau
 
   class StaticAssetsCompiler
     def is_type type, file
