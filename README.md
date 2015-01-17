@@ -21,9 +21,17 @@ Frontsau supports the follogin commands:
     $ frontsau watch
 
 
+## Example
+Frontsau includes a small example to illustrate it's capabilities. You may try it out by
+
+    $ git clone https://github.com/roomthirteen/frontsau.git
+    $ cd frontsau/example
+    $ frontsau compile
+
+
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/frontsau/fork )
+1. Fork it ( https://github.com/roomthirteen/frontsau/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
